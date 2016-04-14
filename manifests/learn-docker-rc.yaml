@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: learn-docker
+  labels:
+    app: learn-docker
+spec:
+  replicas: 1
+  selector:
+    app: learn-docker
+  template:
+    metadata:
+      labels:
+        app: learn-docker
+    spec:
+      containers:
+      - name: docker
+        image: rancher/docker
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - name: docker-run
+          mountPath: /var/run
+        - name: docker-lib
+          mountPath: /var/lib/docker
+      - name: notebook
+        image: tryk8s/docker-notebook
+        ports:
+        - containerPort: 8888
+          name: notebook
+          protocol: TCP
+        volumeMounts:
+        - name: docker-run
+          mountPath: /var/run
+        - name: docker-lib
+          mountPath: /var/lib/docker
+      volumes:
+      - name: docker-run
+        emptyDir: {}
+      - name: docker-lib
+        emptyDir: {}
