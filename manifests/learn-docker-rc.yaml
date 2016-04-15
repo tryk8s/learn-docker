@@ -24,7 +24,7 @@ spec:
         - name: docker-lib
           mountPath: /var/lib/docker
       - name: notebook
-        image: tryk8s/docker-notebook
+        image: tryk8s/learn-docker
         ports:
         - containerPort: 8888
           name: notebook
