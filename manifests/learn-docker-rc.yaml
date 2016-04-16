@@ -16,6 +16,10 @@ spec:
       containers:
       - name: docker
         image: rancher/docker
+        ports:
+        - containerPort: 30080
+          name: http
+          protocol: TCP
         securityContext:
           privileged: true
         volumeMounts:

@@ -6,9 +6,14 @@ metadata:
     app: learn-docker
 spec:
   ports:
-  - port: 8888
+  - name: notebook
+    port: 8888
     protocol: TCP
     nodePort: 30888
+  - name: http
+    port: 30080
+    protocol: TCP
+    nodePort: 30080
   selector:
     app: learn-docker
   type: NodePort
